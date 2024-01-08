@@ -106,7 +106,7 @@ public class BatchProcessor {
    * @return a CompletableFuture that represents the completion of the processing.
    * The CompletableFuture will contain an ExecutionResult that may contain a result or an error message.
    */
-  public CompletableFuture<ExecutionResult<?>> process(){
+  public CompletableFuture<ExecutionResult<?>> process() {
     this.resetProcessing();
 
     final int batchSize = Math.toIntExact(this.options.getBatchSize());
@@ -125,7 +125,7 @@ public class BatchProcessor {
       if (item instanceof Event) {
         events.add((Event) item);
       } else if (item instanceof Identifier) {
-        identifiers.add((Identifier)item);
+        identifiers.add((Identifier) item);
       }
     }
 

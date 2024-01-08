@@ -8,7 +8,6 @@ import earnalliance.model.Payload;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import java.math.BigInteger;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -30,6 +29,7 @@ public class HTTPTransporter {
   private final Long maxRetryAttempts;
   private final Gson gson;
   private final Supplier<HttpClient> httpClientProvider;
+  private final SecretKeySpec secretKey;
 
   public HTTPTransporter(NodeOptions options,
                          Supplier<HttpClient> httpClientProvider,
@@ -38,6 +38,7 @@ public class HTTPTransporter {
     this.maxRetryAttempts = options.getMaxRetryAttempts();
     this.gson = gsonConfiguration.getGson();
     this.httpClientProvider = httpClientProvider;
+    this.secretKey = new SecretKeySpec(this.options.getClientSecret().getBytes(), "HmacSHA256");
   }
 
   /**
@@ -49,7 +50,7 @@ public class HTTPTransporter {
    */
   public CompletableFuture<HttpResponse<String>> send(Payload payload, int attempt) {
     try {
-      String clientId = options.getClientId();
+      String clientId = this.options.getClientId();
       long timestamp = Instant.now().toEpochMilli();
       String signature = sign(payload, timestamp);
 
@@ -80,16 +81,27 @@ public class HTTPTransporter {
    * @throws InvalidKeyException      If the client secret is an invalid key for HmacSHA256 algorithm
    */
   private String sign(Payload payload, long timestamp) throws NoSuchAlgorithmException, InvalidKeyException {
-    String clientId = options.getClientId();
-    String clientSecret = options.getClientSecret();
-
     String body = this.gson.toJson(payload);
-    String message = clientId + timestamp + body;
+    String message = this.options.getClientId() + timestamp + body;
     Mac hmacSHA256 = Mac.getInstance("HmacSHA256");
-    SecretKeySpec secret_key = new SecretKeySpec(clientSecret.getBytes(), "HmacSHA256");
-    hmacSHA256.init(secret_key);
+    hmacSHA256.init(this.secretKey);
 
-    return String.format("%040x", new BigInteger(1, hmacSHA256.doFinal(message.getBytes(StandardCharsets.UTF_8))));
+    return bytesToHex(hmacSHA256.doFinal(message.getBytes(StandardCharsets.UTF_8)));
+  }
+
+  /**
+   * Convert the specified array of bytes to the hex string
+   *
+   * @param bytes input bytes array
+   * @return string, representing the concatenated hex value of the input array
+   */
+  private static String bytesToHex(byte[] bytes) {
+    final var hexString = new StringBuilder(2 * bytes.length);
+    for (byte currentByte : bytes) {
+      hexString.append(String.format("%02x", currentByte));
+    }
+
+    return hexString.toString();
   }
 
   /**
@@ -117,14 +129,14 @@ public class HTTPTransporter {
    * @return A CompletableFuture that resolves to an HttpResponse<String> object if the request is successfully sent.
    */
   private CompletableFuture<HttpResponse<String>> sendHttpRequest(Payload payload, Map<String, String> headers) {
-      HttpClient client = this.httpClientProvider.get();
-      String json = gson.toJson(payload);
-      final var request = HttpRequest.newBuilder()
-        .uri(URI.create(options.getDsn()))
-        .headers(headers.entrySet().stream().flatMap(e -> Stream.of(e.getKey(), e.getValue())).toArray(String[]::new))
-        .POST(HttpRequest.BodyPublishers.ofString(json))
-        .build();
+    HttpClient client = this.httpClientProvider.get();
+    String json = this.gson.toJson(payload);
+    final var request = HttpRequest.newBuilder()
+      .uri(URI.create(this.options.getDsn()))
+      .headers(headers.entrySet().stream().flatMap(e -> Stream.of(e.getKey(), e.getValue())).toArray(String[]::new))
+      .POST(HttpRequest.BodyPublishers.ofString(json))
+      .build();
 
-      return client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+    return client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
   }
 }

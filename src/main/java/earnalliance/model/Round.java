@@ -19,17 +19,15 @@ public final class Round {
   }
 
   public CompletableFuture<ExecutionResult<?>> track(String userId, String eventName) {
-    Event event = Utils.track(userId, eventName);
-    return addEvent(event);
+    return addEvent(Utils.track(userId, eventName));
   }
 
   public CompletableFuture<ExecutionResult<?>> track(String userId, String eventName, Traits traits) {
-    Event event = Utils.track(userId, eventName, traits);
-    return addEvent(event);
+    return addEvent(Utils.track(userId, eventName, traits));
   }
 
   public CompletableFuture<ExecutionResult<?>> track(String userId, String eventName, Long value) {
-    return this.track(userId, eventName, Traits.fromEntries(Traits.numeric("", value)));
+    return addEvent(Utils.track(userId, eventName, value));
   }
 
   private CompletableFuture<ExecutionResult<?>> addEvent(Event event) {

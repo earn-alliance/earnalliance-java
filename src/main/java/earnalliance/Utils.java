@@ -4,7 +4,6 @@ import earnalliance.model.Event;
 import earnalliance.model.Identifier;
 import earnalliance.model.IdentifierPropNames;
 import earnalliance.model.IdentifyingProperties;
-import earnalliance.model.trait.NumericTrait;
 import earnalliance.model.trait.TraitEntry;
 import earnalliance.model.trait.Traits;
 
@@ -23,17 +22,14 @@ public class Utils {
   }
 
   public static Event track(String userId, String eventName, Long value) {
-    return track(userId, eventName, Traits.numeric("", value));
+    final var event = createEvent(userId, eventName);
+    event.setValue(value);
+    return event;
   }
 
   public static Event track(String userId, String eventName, TraitEntry<?> trait) {
     final var event = createEvent(userId, eventName);
-    if (trait instanceof NumericTrait) {
-      event.setValue(((NumericTrait)trait).getValue());
-    }
-
     event.setTraits(Traits.fromEntries(trait));
-
     return event;
   }
 
@@ -95,13 +91,13 @@ public class Utils {
   /**
    * Delays the execution of a CompletableFuture by the specified interval.
    *
-   * @param future    The CompletableFuture to delay.
-   * @param interval  The duration of the delay.
-   * @param timeUnit  The time unit of the delay duration.
-   * @param <T>       The type of the CompletableFuture's result.
+   * @param future   The CompletableFuture to delay.
+   * @param interval The duration of the delay.
+   * @param timeUnit The time unit of the delay duration.
+   * @param <T>      The type of the CompletableFuture's result.
    * @return A new CompletableFuture that represents the delayed execution of the input CompletableFuture.
-   *                  The result of the CompletableFuture will be the same as the result of the input CompletableFuture.
-   * @throws IllegalStateException  If the delay is interrupted.
+   * The result of the CompletableFuture will be the same as the result of the input CompletableFuture.
+   * @throws IllegalStateException If the delay is interrupted.
    */
   public static <T> CompletableFuture<T>
   delayFuture(Supplier<CompletableFuture<T>> future, long interval, TimeUnit timeUnit) {

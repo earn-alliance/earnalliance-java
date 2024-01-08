@@ -79,7 +79,7 @@ public final class Alliance {
     final var validator = new NodeOptionsRequiredFieldsValidator();
     var result = validator.validate(options);
     if (result instanceof ValidationFailure) {
-      final var errors = String.join(", ", ((ValidationFailure)result).getErrors());
+      final var errors = String.join(", ", ((ValidationFailure) result).getErrors());
       throw new IllegalArgumentException("Missing required client options: " + errors);
     }
   }

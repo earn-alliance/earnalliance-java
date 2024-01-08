@@ -22,4 +22,13 @@ public abstract class TraitEntry<T> {
   public Class<T> getType() {
     return type;
   }
+
+  @Override
+  public String toString() {
+    return "TraitEntry{" +
+      "key='" + key + '\'' +
+      ", value=" + value +
+      ", type=" + type.getName() +
+      '}';
+  }
 }

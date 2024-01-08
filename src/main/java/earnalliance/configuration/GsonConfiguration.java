@@ -9,6 +9,7 @@ public class GsonConfiguration {
   public Gson getGson() {
     return new GsonBuilder()
       .registerTypeAdapter(Traits.class, new TraitsSerializer())
+      .serializeNulls()
       .create();
   }
 }
