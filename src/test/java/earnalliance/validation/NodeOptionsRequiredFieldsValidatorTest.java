@@ -21,12 +21,11 @@ class NodeOptionsRequiredFieldsValidatorTest {
     final var options = NodeOptions.newBuilder()
       .withClientId("clientId")
       .withClientSecret("clientSecret")
-      .withGameId("gameId")
       .build();
 
     final var actual = subject.validate(options);
     Assertions.assertInstanceOf(ValidationFailure.class, actual);
-    Assertions.assertEquals(List.of("dsn"), ((ValidationFailure) actual).getErrors());
+    Assertions.assertEquals(List.of("gameId"), ((ValidationFailure) actual).getErrors());
   }
 
   @Test

@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.earnalliance</groupId>
-    <artifactId>earnalliance-java-sdk</artifactId>
+    <artifactId>earnalliance-java</artifactId>
     <packaging>jar</packaging>
     <version>1.0</version>
-    <name>earnalliance-java-sdk</name>
+    <name>earnalliance-java</name>
 
     <properties>
         <!-- Java version used -->
@@ -94,10 +94,9 @@
 
     <distributionManagement>
         <repository>
-            <id>maven-central</id>
-            <name>Maven Central</name>
-            <url>https://repo.maven.apache.org/maven2</url>
+          <id>github</id>
+          <name>GitHub Packages</name>
+          <url>https://maven.pkg.github.com/earn-alliance/earnalliance-java</url>
         </repository>
     </distributionManagement>
-
 </project>
