@@ -33,7 +33,7 @@ To install the SDK either pull it from our repository:
 <dependency>
   <groupId>com.earnalliance</groupId>
   <artifactId>earnalliance-java</artifactId>
-  <version>1.0</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
@@ -49,7 +49,7 @@ Then reference it in your maven dependency management section:
 <dependency>
   <groupId>com.earnalliance</groupId>
   <artifactId>earnalliance-java</artifactId>
-  <version>1.0</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
