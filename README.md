@@ -17,15 +17,40 @@
 - [Installation and Usage](#installation-and-usage)
 
 ## Prerequisites
-* java 21+
+* java 11+
 * maven build tool
 
 ## Installation and Usage
 
-To install a SDK, simply publish the package to the local repository, for example:
+To install the SDK either pull it from our repository:
+```xml
+<repository>
+  <id>github-public</id>
+  <url>https://public:&#103;hp_Q9h2STZgRTs3kENG65WeAGSJYhpb7q12W896@maven.pkg.github.com/earn-alliance/earnalliance-java</url>
+</repository>
+```
+```xml
+<dependency>
+  <groupId>com.earnalliance</groupId>
+  <artifactId>earnalliance-java</artifactId>
+  <version>1.0</version>
+</dependency>
+```
 
+Or build it yourself from the source code, simply by cloning the repository and publish the package to the local m2 repository, for example:
+
+Build and publish SDK locally:
 ```sh
 mvn clean install
+```
+
+Then reference it in your maven dependency management section:
+```xml
+<dependency>
+  <groupId>com.earnalliance</groupId>
+  <artifactId>earnalliance-java</artifactId>
+  <version>1.0</version>
+</dependency>
 ```
 
 ### Initialize
