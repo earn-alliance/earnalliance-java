@@ -20,6 +20,9 @@
 * java 11+
 * maven build tool
 
+## Supported platforms
+Any platform capable of running JVM
+
 ## Installation and Usage
 
 To install the SDK either pull it from our repository:
