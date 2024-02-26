@@ -1,5 +1,21 @@
 plugins {
+  id 'java'
   id 'maven-publish'
+}
+
+group 'com.earnalliance'
+version '1.0.1'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation 'com.google.code.gson:gson:2.10.1'
+  testImplementation 'org.mockito:mockito-core:5.8.0'
+  testImplementation 'org.mockito:mockito-junit-jupiter:5.8.0'
+  testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.1'
+  testImplementation 'org.junit.platform:junit-platform-launcher:1.10.1'
 }
 
 publishing {
@@ -13,4 +29,9 @@ publishing {
       }
     }
   }
+}
+
+tasks.withType(JavaCompile).configureEach {
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
 }
