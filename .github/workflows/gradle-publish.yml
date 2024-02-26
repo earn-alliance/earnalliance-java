@@ -7,10 +7,11 @@
 # To get a newer version, you will need to update the SHA.
 # You can also reference a tag or branch, but the action may change without warning.
 
-name: Publish package to GitHub Packages
-on:
-  release:
-    types: [created]
+name: Publish gradle package to GitHub Packages
+on: workflow_dispatch
+# on:
+  # release:
+    # types: [created]
 jobs:
   publish:
     runs-on: ubuntu-latest
