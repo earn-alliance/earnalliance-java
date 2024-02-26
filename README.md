@@ -26,25 +26,58 @@ Any platform capable of running JVM
 ## Installation and Usage
 
 To install the SDK either pull it from our repository:
+
+### Maven:
+
+Repository Configuration
 ```xml
 <repository>
   <id>github-public</id>
   <url>https://public:&#103;hp_Q9h2STZgRTs3kENG65WeAGSJYhpb7q12W896@maven.pkg.github.com/earn-alliance/earnalliance-java</url>
 </repository>
 ```
+
+Dependency Configuration
 ```xml
 <dependency>
   <groupId>com.earnalliance</groupId>
   <artifactId>earnalliance-java</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
+```
+
+### Gradle:
+Repository Configuration
+```kts
+repositories {
+  maven {
+    name = "github-public"
+    url = uri("https://maven.pkg.github.com/earn-alliance/earnalliance-java")
+    credentials {
+      username = "public"
+      password = "<Your GitHub Credential/Access Token>"
+    }
+  }
+}
+```
+
+Dependency Configuration
+```kts
+implementation("com.earnalliance:earnalliance-java:1.0.1")
 ```
 
 Or build it yourself from the source code, simply by cloning the repository and publish the package to the local m2 repository, for example:
 
 Build and publish SDK locally:
+
+Maven:
 ```sh
 mvn clean install
+```
+
+Gradle:
+```sh
+./gradlew publishToMavenLocal
 ```
 
 Then reference it in your maven dependency management section:
@@ -52,8 +85,12 @@ Then reference it in your maven dependency management section:
 <dependency>
   <groupId>com.earnalliance</groupId>
   <artifactId>earnalliance-java</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
+```
+Or in your gradle dependency management section:
+```kts
+implementation("com.earnalliance:earnalliance-java:1.0.1")
 ```
 
 ### Initialize

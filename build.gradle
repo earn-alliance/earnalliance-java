@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.earnalliance'
-version '1.0.1-gradle'
+version '1.0.1'
 
 repositories {
   mavenCentral()
