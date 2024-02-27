@@ -90,8 +90,10 @@ class AllianceE2ETest {
     var round = this.alliance.startRound("2031");
     var futures = IntStream.iterate(0, i -> i + 1)
       .limit(20)
-      .mapToObj(i -> round.track("2031", "KILL_ZOMBIE", Long.valueOf(i)))
+      .mapToObj(i -> round.track("2031", "KILL_ZOMBIE", i))
       .collect(Collectors.toList());
+
+    futures.add(round.track("2031", "HEALTH_RECOVERED", 22.55f));
 
     futures.forEach(future -> {
       try {

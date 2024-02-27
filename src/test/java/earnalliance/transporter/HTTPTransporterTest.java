@@ -62,8 +62,8 @@ class HTTPTransporterTest {
       Traits.numeric("short", (short) 5),
       Traits.numeric("integer", 5),
       Traits.numeric("long", 5L),
-      Traits.numeric("double", 5.5d),
-      Traits.numeric("float", 10.1f)
+      Traits.numeric("double", 5.5D),
+      Traits.numeric("float", 10.1F)
     );
 
     Event event = new Event();

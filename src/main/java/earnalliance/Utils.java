@@ -21,7 +21,7 @@ public class Utils {
     return createEvent(userId, eventName);
   }
 
-  public static Event track(String userId, String eventName, Long value) {
+  public static Event track(String userId, String eventName, Number value) {
     final var event = createEvent(userId, eventName);
     event.setValue(value);
     return event;

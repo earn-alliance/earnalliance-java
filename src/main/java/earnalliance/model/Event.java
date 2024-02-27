@@ -11,7 +11,7 @@ public final class Event implements QueueItem {
   private String event;
   private String groupId;
   private Traits traits;
-  private Long value;
+  private Number value;
 
   public String getUserId() {
     return this.userId;
@@ -53,11 +53,11 @@ public final class Event implements QueueItem {
     this.traits = traits;
   }
 
-  public Long getValue() {
+  public Number getValue() {
     return this.value;
   }
 
-  public void setValue(Long value) {
+  public void setValue(Number value) {
     this.value = value;
   }
 

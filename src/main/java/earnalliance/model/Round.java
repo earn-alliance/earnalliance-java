@@ -26,7 +26,7 @@ public final class Round {
     return addEvent(Utils.track(userId, eventName, traits));
   }
 
-  public CompletableFuture<ExecutionResult<?>> track(String userId, String eventName, Long value) {
+  public CompletableFuture<ExecutionResult<?>> track(String userId, String eventName, Number value) {
     return addEvent(Utils.track(userId, eventName, value));
   }
 

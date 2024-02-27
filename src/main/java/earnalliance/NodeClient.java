@@ -53,7 +53,7 @@ public class NodeClient {
     return this.processor.addEvent(event);
   }
 
-  public CompletableFuture<ExecutionResult<?>> track(String userId, String eventName, Long value) {
+  public CompletableFuture<ExecutionResult<?>> track(String userId, String eventName, Number value) {
     Event event = Utils.track(userId, eventName, value);
     return this.processor.addEvent(event);
   }
