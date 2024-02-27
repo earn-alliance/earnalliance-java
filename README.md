@@ -42,7 +42,7 @@ Dependency Configuration
 <dependency>
   <groupId>com.earnalliance</groupId>
   <artifactId>earnalliance-java</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 
@@ -63,7 +63,7 @@ repositories {
 
 Dependency Configuration
 ```kts
-implementation("com.earnalliance:earnalliance-java:1.0.1")
+implementation("com.earnalliance:earnalliance-java:1.0.2")
 ```
 
 Or build it yourself from the source code, simply by cloning the repository and publish the package to the local m2 repository, for example:
@@ -85,12 +85,12 @@ Then reference it in your maven dependency management section:
 <dependency>
   <groupId>com.earnalliance</groupId>
   <artifactId>earnalliance-java</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 Or in your gradle dependency management section:
 ```kts
-implementation("com.earnalliance:earnalliance-java:1.0.1")
+implementation("com.earnalliance:earnalliance-java:1.0.2")
 ```
 
 ### Initialize
