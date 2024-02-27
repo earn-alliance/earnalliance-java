@@ -58,7 +58,12 @@ class HTTPTransporterTest {
     Traits traits = Traits.fromEntries(
       Traits.string("string", "value"),
       Traits.bool("bool", false),
-      Traits.numeric("numeric", 5L)
+      Traits.numeric("byte", (byte) 5),
+      Traits.numeric("short", (short) 5),
+      Traits.numeric("integer", 5),
+      Traits.numeric("long", 5L),
+      Traits.numeric("double", 5.5d),
+      Traits.numeric("float", 10.1f)
     );
 
     Event event = new Event();

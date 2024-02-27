@@ -30,8 +30,28 @@ public final class Traits {
     return new BooleanTrait(key, value);
   }
 
+  public static TraitEntry<Byte> numeric(final String key, final Byte value) {
+    return new NumericTrait<>(key, value, Byte.class);
+  }
+
+  public static TraitEntry<Short> numeric(final String key, final Short value) {
+    return new NumericTrait<>(key, value, Short.class);
+  }
+
+  public static TraitEntry<Integer> numeric(final String key, final Integer value) {
+    return new NumericTrait<>(key, value, Integer.class);
+  }
+
   public static TraitEntry<Long> numeric(final String key, final Long value) {
-    return new NumericTrait(key, value);
+    return new NumericTrait<>(key, value, Long.class);
+  }
+
+  public static TraitEntry<Double> numeric(final String key, final Double value) {
+    return new NumericTrait<>(key, value, Double.class);
+  }
+
+  public static TraitEntry<Float> numeric(final String key, final Float value) {
+    return new NumericTrait<>(key, value, Float.class);
   }
 
   public List<TraitEntry<?>> getTraits() {
